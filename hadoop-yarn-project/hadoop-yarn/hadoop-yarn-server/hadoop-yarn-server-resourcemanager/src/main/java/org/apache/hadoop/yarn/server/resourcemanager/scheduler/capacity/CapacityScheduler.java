@@ -2539,6 +2539,8 @@ public class CapacityScheduler extends
           SchedulerRequestKey.extractFrom(container),
           appAttempt.getApplicationAttemptId(), container.getNodeId(),
           appAttempt.getUser(), rmContext, false);
+      ((RMContainerImpl)rmContainer).setAllocationTags(
+          new HashSet<>(schedulingRequest.getAllocationTags()));
 
       allocated = new ContainerAllocationProposal<>(
           getSchedulerContainer(rmContainer, true),
