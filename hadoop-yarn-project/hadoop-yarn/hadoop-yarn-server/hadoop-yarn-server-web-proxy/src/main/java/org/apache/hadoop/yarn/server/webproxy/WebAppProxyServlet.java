@@ -245,6 +245,11 @@ public class WebAppProxyServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
   throws IOException{
+    String ip = req.getRemoteAddr();
+    String appId = null;
+    String proxy = getProxyHost();
+    if ((ip != null) && (ip.equalsIgnoreCase(InetAddress.getByName(proxy).getHostAddress())))
+      return;
     try {
       String userApprovedParamS = 
         req.getParameter(ProxyUriUtils.PROXY_APPROVAL_PARAM);
